@@ -1,3 +1,4 @@
+<!-- Aaron Cheng, Odd 7-8, 11/29/22, Code Breaker -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +13,20 @@
             firstDigit = parseInt(Math.random()*3)+1;
             secondDigit = parseInt(Math.random()*3)+1;
             thirdDigit = parseInt(Math.random()*3)+1;
-            code = firstDigit + "" + secondDigit + "" + thirdDigit;
+            code = "Guess: " + firstDigit + "" + secondDigit + "" + thirdDigit;
 
             console.log(code);
-            guess="";
+            guess="Guess: ";
 
             timer=document.getElementById("timer");
             guessDisplay=document.getElementById("guess");
         }
 
         function display(){
-            if (guess.length == 3 && guess == code){
+            if (guess.length == 10 && guess == code){
                 timer.innerHTML = "You win!";
             }
-            else if (clock > 0){
+            else if (guess.length == 10 && clock > 0){
                 timer.innerHTML = clock + " turns";
             
             }
@@ -36,30 +37,35 @@
         }
 
         function clockDec(){
-            clock = clock - 1;
-            display();
+            if (guess.length == 10){
+                clock = clock - 1;
+                display();
+            }
         }
 
-        
-
         function add1(){
-            if (guess.length < 3){
+            if (guess.length < 10){
                 guess = guess + "" + 1;
             }
             display();
         }
 
         function add2(){
-            if (guess.length < 3){
+            if (guess.length < 10){
                 guess = guess + "" + 2;
             }
             display();
         }
 
         function add3(){
-            if (guess.length < 3){
+            if (guess.length < 10){
                 guess = guess + "" + 3;
             }
+            display();
+        }
+
+        function clearGuess(){
+            guess="Guess: ";
             display();
         }
 
@@ -67,11 +73,12 @@
 </head>
 <body onload="initialize()">
     <div id="timer">7 turns</div>
-    <div id="guess">___</div>
+    <div id="guess">Guess: </div>
     <br />
     <button onclick="add1()">1</button>
     <button onclick="add2()">2</button>
     <button onclick="add3()">3</button>
     <button onclick="clockDec()">Guess</button>
+    <button onclick="clearGuess()">Clear</button>
 </body>
 </html>
